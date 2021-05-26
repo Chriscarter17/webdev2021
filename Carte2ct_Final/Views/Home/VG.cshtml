@@ -1,0 +1,51 @@
+﻿@model List<Games>
+@{
+    ViewBag.Title = "My Games";
+}
+
+
+<nav class="navbar navbar-expand-md navbar-dark
+                bg-primary fixed-top">
+    <a asp-controller="Home" asp-action="Index"
+       class="list-group-item"> About Me</a>
+    <a asp-controller="Home" asp-action="About"
+       class="list-group-item">Who am I?</a>
+    <a asp-controller="Home" asp-action="VG"
+       class="list-group-item">Add Games </a>
+
+    <a asp-controller="Home" asp-action="FavGames"
+       class="list-group-item">Favorites </a>
+    <a asp-controller="Home" asp-action="Sports"
+       class="list-group-item">Sports </a>
+    <a asp-controller="Home" asp-action="FunFacts"
+       class="list-group-item">Fun Facts </a>
+</nav>
+
+
+
+<h2>Game List</h2>
+<a asp-controller="Game" asp-action="Add">Add New Game</a>
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr><th>Name</th><th>Year</th><th>Genre</th><th>Rating</th><th></th></tr>
+    </thead>
+    <tbody>
+        @foreach (var games in Model)
+        {
+            <tr>
+                <td>@games.Name</td>
+                <td>@games.Year</td>
+                <td>@games.Genre.Name</td>
+                <td>@games.Rating</td>
+                <td>
+                    <a asp-controller="Game" asp-action="Edit"
+                       asp-route-id="@games.GameId"
+                       asp-route-slug="@games.Slug">Edit</a>
+                    <a asp-controller="Game" asp-action="Delete"
+                       asp-route-id="@games.GameId"
+                       asp-route-slug="@games.Slug">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
